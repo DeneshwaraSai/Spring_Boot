@@ -1,0 +1,55 @@
+{
+    "firstName": "qwerty",
+    "lastName": "QWER",
+    "middleName": "Qw",
+    "uhid": 15646,
+    "gender": "M",
+    "birthDate": "2022-11-12T18:30:00.000+00:00",
+    "id": null,
+    "about": null,
+    "status": "A",
+    "address": [
+        {
+            "type": "P",
+            "lineOne": "India",
+            "lineTwo": null,
+            "lineThree": null,
+            "city": "Mumbai",
+            "country": "India",
+            "state": "MH",
+            "districts": "MB",
+            "postalCode": "455676",
+            "id": null
+        }
+    ],
+    "telephone": [
+        {
+            "type": "P",
+            "dialNumber": "9121326554",
+            "countryDialing": "+91",
+            "areaDialing": null,
+            "extension": null,
+            "id": null
+        }
+    ],
+"qualificationInfo": [
+        {
+            "id": null,
+            "qualificationName": "Btech",
+            "schoolName": "Gcet",
+            "startDate": "2017-08-14",
+            "endDate": "2022-08-01",
+            "atPresent": false
+        }
+    ],   
+     "professionalInfo": [
+        {
+            "id": null,
+            "employerName": "HCN",
+            "position": "SDE",
+            "startDate": "2022-08-02",
+            "endDate": null,
+            "atPresent": true
+        }
+    ]
+}

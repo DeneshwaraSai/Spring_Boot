@@ -1,0 +1,27 @@
+server:
+ port: 9121
+ servlet:
+  session: 
+   timeout: 10s
+   
+spring:
+ application:
+   name: alumini-service
+   
+ datasource:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  jdbc-url: jdbc:mysql://localhost:3306/STUDENT
+  username: root
+  password: root
+  testWhileIdle: true
+  validataionQuery: select 1 from dual
+ jpa:
+  datasource: default
+  generate-ddl: true
+  hibernate:
+   ddl-auto: create
+  properties:
+   hibernate:
+    dialect: org.hibernate.dialect.MySQL8Dialect
+    show_sql: true
+    format_sql: true
