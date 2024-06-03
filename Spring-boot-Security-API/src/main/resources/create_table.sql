@@ -1,0 +1,41 @@
+USE EMPLOYEE_DIRECTORY;
+
+DROP TABLE IF EXISTS EMPLOYEE_DIRECTORY.AUTHORITIES;
+DROP TABLE IF EXISTS USERS;
+
+CREATE TABLE `USERS` (
+  `USERNAME` VARCHAR(50) NOT NULL,
+  `PASSWORD` VARCHAR(68) NOT NULL,
+  `ENABLED` TINYINT NOT NULL,
+  PRIMARY KEY (`USERNAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Inserting data for table `users`
+--
+
+INSERT INTO `USERS` 
+VALUES 
+('john','{noop}test123',1),
+('mary','{noop}test123',1),
+('susan','{noop}test123',1),
+('James','{bcrypt}$2a$10$is4xj3s6Nr6JIuOSG0xUk.mId6x/xn6sbI/RIm3mFD3ICC0xctfXG', 1),
+('haves','{bcrypt}$2a$10$is4xj3s6Nr6JIuOSG0xUk.mId6x/xn6sbI/RIm3mFD3ICC0xctfXG', 1),
+('caves','{bcrypt}$2a$10$is4xj3s6Nr6JIuOSG0xUk.mId6x/xn6sbI/RIm3mFD3ICC0xctfXG', 1);
+
+--
+-- Table structure for table `authorities`
+--
+
+CREATE TABLE `AUTHORITIES` (
+  `USERNAME` VARCHAR(50) NOT NULL,
+  `AUTHORITY` VARCHAR(50) NOT NULL,
+  UNIQUE KEY `AUTHORITIES_IDX_1` (`USERNAME`,`AUTHORITY`),
+  CONSTRAINT `AUTHORITIES_IBFK_1` FOREIGN KEY (`USERNAME`) REFERENCES `USERS` (`USERNAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Inserting data for table `authorities`
+--
+
+INSERT INTO `auth

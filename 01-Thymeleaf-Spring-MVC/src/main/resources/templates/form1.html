@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<title> Fill Form </title>	
+	</head>
+	
+	<body>
+		<form th:action="@{/submitForm}" method="POST">
+			
+			<label> Username :  </label>
+			<input type="text" name="name" placeholder="What's your name ?" />
+			<br>
+			<label> Roll Number :  </label>
+			<input type="text" name="rollNo" placeholder="What's your rollNo ?" />
+			<br>
+			<label> Class :  </label>
+			<input type="text" name="standard" placeholder="What's your class ?" />		
+			<br>
+			<input type="submit" />
+		
+		</form>
+	</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title> Student Confirmation Form </title>
+	</head>
+	
+	<body style="margin-left: 15%; margin-right: 15%;">
+		<h3> Student Confirmation Form </h3>
+		<p th:text=" 'The student is confirmed with name ' + ${student.firstName} + ' ' + ${student.lastName} + ' and from ' + ${student.country} " > </p>
+		<p th:text="'Favourite Skills : ' + ${student.favouriteLanguage}"> </p>
+		<p th:text="'Favourite OSs : '" > </p>
+		<ul>
+			<li th:each="os : ${student.favouriteSystems}" th:text="${os}"> </l1>	
+		</ul>
+	</body>
+</html>

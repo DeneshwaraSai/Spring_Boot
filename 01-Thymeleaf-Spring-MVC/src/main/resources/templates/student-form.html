@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title> Student Registration Form </title>
+	</head>
+	
+	<body>
+		<h3> Student Registration Form </h3>
+		
+		<form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+			
+			<label> First name: </label>
+			<input type="text" th:field="*{firstName}" />
+			<br/></br/>
+			
+			<label> Last name: </label>
+			<input type="text" th:field="*{lastName}" />
+			<br/></br/>
+	
+			<label> Choose a Country : </label>
+			<select th:field="*{country}">
+				<!-- 
+					<option value="India"> India </option>
+					<option value="USA"> USA </option>	
+					<option value="Russia"> Russia </option>
+					<option value="China"> China </option>
+					<option value="Norway"> Norway </option>
+					<option value="Spain"> Spain </option>
+				-->
+				
+				<option th:each="country : ${countries}" 
+						th:value="${country}"
+						th:text="${country}" > </option>
+						
+			</select> 
+			
+			<br/></br/>
+			
+			<label> Slect your favourite language/Frameworks : </label>
+			<input type="radio" th:field="*{favouriteLanguage}" th:value="React"> React </input>
+			<input type="radio" th:field="*{favouriteLanguage}" th:value="Angular"> Angular </input>
+			<input type="radio" th:field="*{favouriteLanguage}" th:value="Spring-boot"> Spring-boot </input>
+			<input type="radio" th:field="*{favouriteLanguage}" th:value="Flask"> Flask </input>
+
+			<br/></br/>
+				
+			<input type="radio" th:each="skills : ${listOfSkills}" 
+			th:field="*{favouriteLanguage}" th:value="${skills}" th:text="${skills}" /> 
+			
+			<br/></br/>
+			<input type="checkbox" th:field="*{favouriteSystems}" th:value="Mac-OS" > Mac-OS </input>
+			<input type="checkbox" th:field="*{favouriteSystems}" th:value="Windows" > Windows </input>
+			<input type="checkbox" th:field="*{favourbb biteSystems}" th:value="Linux" > Linux </input>
+				
+			<br/></br/>
+			<input type="checkbox" th:field="*{favouriteSystems}" th:each="systems : ${favouriteOS}"
+										th:value="${systems}"
+										th:text="${systems}" />
+			
+			<br /> </br>
+						
+			<input type="submit" value="Submit" />
+		</form>
+	</body>
+</html>

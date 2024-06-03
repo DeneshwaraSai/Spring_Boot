@@ -1,0 +1,22 @@
+<!DOCTYPE HYML>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title> Customer Form </title> 
+		<style> 
+			.error {
+				color: red;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<h2 th:text="'The customer name is ' + ${customer.firstName} + ' ' + ${customer.lastName} "> 
+			INFO INFO	
+		</h2>
+		<h4 th:text="'Free Passes : ' + ${customer.freePasses}"> </h4>
+		<h4 th:text="'Course Code : ' + ${customer.courseCode}"> </h4>
+		
+	</body>
+	
+</html>
