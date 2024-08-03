@@ -12,7 +12,6 @@
 		</query>
 	</named-native-query>
 	
-	
 	<named-native-query result-set-mapping="SimplePatientHeaderByUhidMapping" 
 		name="PatientService.findPatientByUhid">
 		<query>
@@ -34,7 +33,7 @@
 		<query>
 			SELECT D.ID, D.NAME, D.TYPE, D.HSN_CODE, D.GENERIC_NAME, T.SGST, T.CGST, T.IGST, D.STATUS FROM PHARMACY.DRUG_SETUP D
 			LEFT JOIN PHARMACY.TAX_CATEGORY T ON T.CODE = D.HSN_CODE
-			WHERE D.NAME LIKE CONCAT('%', :name ,'%')
+			WHERE D.STATUS = 'A' AND D.NAME LIKE CONCAT('%', :name ,'%')
 			ORDER BY D.NAME ASC;
 		</query>
 	</named-native-query>

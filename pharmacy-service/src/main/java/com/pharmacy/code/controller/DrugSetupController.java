@@ -49,4 +49,9 @@ public class DrugSetupController {
 	public List<DrugSetupDto> findAll(@RequestParam(name = "name", defaultValue = "") String name) {
 		return drugSetupService.findAllDrugByName(name);
 	}
+	
+	@GetMapping(path = "/drug/name")
+	public List<DrugSetupDto> findAllDrugByName(@RequestParam(name = "name") String name) {
+		return drugSetupService.findAllDrugByName(name);
+	}
 }
