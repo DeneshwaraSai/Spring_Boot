@@ -26,7 +26,7 @@ public class Supplier {
 
 	@Column(name = "CODE", nullable = false, updatable = false, length = 5)
 	@NotBlank(message =  "Code cannot be empty")
-	@Size(min=1, max = 5, message = "The length of name should be between 1 and 5")
+	@Size(min=1, max = 5, message = "The length of code should be between 1 and 5")
 	private String code;
 
 	@Column(name = "ACCOUNT_NUMBER", length = 20)

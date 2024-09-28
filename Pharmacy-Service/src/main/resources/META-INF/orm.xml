@@ -12,6 +12,18 @@
 		</query>
 	</named-native-query>
 	
+	<named-native-query name="SupplierService.getBySupplierCode">
+		<query>
+			SELECT COUNT(*) FROM SUPPLIER WHERE CODE=:code
+		</query>
+	</named-native-query>
+	
+	<named-native-query name="InventoryService.updateInventoryByIdAndStatus">  
+		<query>
+			UPDATE INVENTORY SET STATUS = :status WHERE ID = :id 
+		</query>
+	</named-native-query>
+	
 	<named-native-query result-set-mapping="SimplePatientHeaderByUhidMapping" 
 		name="PatientService.findPatientByUhid">
 		<query>
@@ -19,6 +31,23 @@
 		    FLOOR(DATEDIFF(NOW(), PAT.DATE_OF_BIRTH) / 365.25) AS AGE, PAT.GENDER, 
 		    '' AS ORDER_NUMBER, '' ORDER_STATUS FROM PHARMACY.PATIENT PAT
 			WHERE PAT.UHID = :uhid
+		</query>
+	</named-native-query>
+	
+	
+	<named-native-query result-set-mapping="SimpleInventorySearch" name="InventoryService.getSearchedInventoryOrder">
+		<query>
+			SELECT I.SUPPLIER_CODE, S.NAME AS SUPPLIER_NAME, ID.DRUG_CODE, D.NAME AS DRUG_NAME,
+			ID.BATCH_NUMBER, ID.HSN_CODE, ID.EXPIRY_DATE, ID.QUANTITY,
+			ID.SELLING_COST, ID.TOTAL_SELLING_COST, T.CGST, T.SGST
+			FROM PHARMACY.INVENTORY I
+			LEFT JOIN PHARMACY.INVENTORY_DETAILS ID ON ID.INVENTORY_DETAILS_ID = I.ID
+			LEFT JOIN PHARMACY.TAX_CATEGORY T ON T.CODE = ID.HSN_CODE
+			LEFT JOIN PHARMACY.DRUG_SETUP D ON (D.ID) = ID.DRUG_CODE
+			LEFT JOIN PHARMACY.SUPPLIER S ON S.CODE  = I.SUPPLIER_CODE
+			WHERE UPPER(D.NAME) LIKE CONCAT('%', :name, '%') || 
+			UPPER(S.NAME) LIKE CONCAT('%', :name,'%') ||
+			ID.BATCH_NUMBER LIKE CONCAT('%', :name,'%')
 		</query>
 	</named-native-query>
 
@@ -38,6 +67,13 @@
 		</query>
 	</named-native-query>
 	 
+	<named-native-query name="InventoryService.getInventoryDashboard" result-set-mapping="SimpleInventoryDashboardMapping">
+		<query>
+			SELECT I.ID, I.SUPPLIER_CODE, I.INVENTORY_NUMBER, I.INVOICE_NUMBER, 
+			I.INVOICE_DATE, I.INVOICE_AMT, I.STATUS, I.CREATED_BY FROM PHARMACY.INVENTORY I
+		</query>
+	</named-native-query>
+
 	 <sql-result-set-mapping name="SimplePatientSearchMapping">
 		<constructor-result target-class="com.pharmacy.code.dto.PatientSearchDto">
 			<column name="FIRST_NAME" class="java.lang.String" /> 
@@ -82,4 +118,34 @@
 		</constructor-result>
 	</sql-result-set-mapping>
 
+	<sql-result-set-mapping name="SimpleInventoryDashboardMapping">
+		<constructor-result target-class="com.pharmacy.code.dto.InventoryDashboard">
+			<column name="ID" class="java.lang.Integer" />
+			<column name="SUPPLIER_CODE" class="java.lang.String" />
+			<column name="INVENTORY_NUMBER" class="java.lang.String" /> 
+			<column name="INVOICE_NUMBER" class="java.lang.String" />
+			<column name="INVOICE_DATE" class="java.util.Date" /> 
+			<column name="INVOICE_AMT" class="java.lang.Double" />
+			<column name="STATUS" class="java.lang.String" />
+			<column name="CREATED_BY" class="java.lang.String" />
+		</constructor-result>
+	</sql-result-set-mapping>
+	
+	<sql-result-set-mapping name="SimpleInventorySearch"> 
+		<constructor-result target-class="com.pharmacy.code.dto.InventorySearchDto">  
+			<column name="DRUG_CODE" class="java.lang.Integer" />
+			<column name="SUPPLIER_CODE" class="java.lang.String" />
+			<column name="SUPPLIER_NAME" class="java.lang.String" />
+			<column name="DRUG_NAME" class="java.lang.String" />
+			<column name="BATCH_NUMBER" class="java.lang.String" />
+			<column name="HSN_CODE" class="java.lang.String" />
+			<column name="EXPIRY_DATE" class="java.util.Date" />
+			<column name="QUANTITY" class="java.lang.Integer" />
+			<column name="SELLING_COST" class="java.lang.Float" />
+			<column name="TOTAL_SELLING_COST" class="java.lang.Float" />
+			<column name="CGST" class="java.lang.Float" />
+			<column name="SGST" class="java.lang.Float" />
+		</constructor-result>
+	</sql-result-set-mapping>
+	
 </entity-mappings>
