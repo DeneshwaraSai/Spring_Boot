@@ -1,4 +1,4 @@
-package com.billing.entity;
+package com.pharmacy.code.billing.entity;
 
 import java.util.Date;
 import java.util.List;
@@ -29,9 +29,6 @@ public class BillReceivable {
 	@Pattern(regexp = "^[a-zA-Z0-9_-]{36}$")
 	private String billNumber;
 
-	@Column(name="SEQUENCE_NUMBER")
-	private String sequenceNumber;
-
 	@Column(name = "BILL_DATE", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", updatable = false)
 	@NotNull(message = "Bill date cannot be null.")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -44,7 +41,7 @@ public class BillReceivable {
 	@Column(name = "AMOUNT_PAID")
 	@NotNull(message = "Amount paid cannot be null.")
 	@Positive(message = "Amount paid should be greater than 0")
-	private Integer amountPaid;
+	private Double amountPaid;
 
 	@Column(name = "DUE_AMOUNT")
 	private Double dueAmount;
@@ -64,10 +61,13 @@ public class BillReceivable {
 	@JoinColumn(name = "BILL_NUMBER", nullable = false)
 	List<BillReceivableDetails> billReceivableDetails;
 
-	public BillReceivable(String billNumber, String sequenceNumber, Date billDate, String createdBy, Integer amountPaid,
+	public BillReceivable() {
+
+	}
+
+	public BillReceivable(String billNumber, Date billDate, String createdBy, Double amountPaid,
 			Double dueAmount, String lastModifiedBy, String status, String notes, List<BillReceivableDetails> billReceivableDetails) {
 		this.billNumber = billNumber;
-		this.sequenceNumber = sequenceNumber;
 		this.billDate = billDate;
 		this.createdBy = createdBy;
 		this.amountPaid = amountPaid;
@@ -90,14 +90,6 @@ public class BillReceivable {
 		}
 	}
 
-	public String getSequenceNumber() {
-		return sequenceNumber;
-	}
-
-	public void setSequenceNumber(String sequenceNumber) {
-		this.sequenceNumber = sequenceNumber;
-	}
-
 	public Date getBillDate() {
 		return billDate;
 	}
@@ -114,11 +106,11 @@ public class BillReceivable {
 		this.createdBy = createdBy;
 	}
 
-	public Integer getAmountPaid() {
+	public Double getAmountPaid() {
 		return amountPaid;
 	}
 
-	public void setAmountPaid(Integer amountPaid) {
+	public void setAmountPaid(Double amountPaid) {
 		this.amountPaid = amountPaid;
 	}
 
@@ -162,11 +154,11 @@ public class BillReceivable {
 		this.billReceivableDetails = billReceivableDetails;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "BillReceivable [billNumber=" + billNumber + ", sequenceNumber=" + sequenceNumber + ", billDate="
-				+ billDate + ", createdBy=" + createdBy + ", amountPaid=" + amountPaid + ", dueAmount=" + dueAmount
-				+ ", lastModifiedBy=" + lastModifiedBy + ", status=" + status + ", notes=" + notes
-				+ ", billReceivableDetails=" + billReceivableDetails + "]";
+		return "BillReceivable [billNumber=" + billNumber + ", billDate=" + billDate + ", createdBy=" + createdBy
+				+ ", amountPaid=" + amountPaid + ", dueAmount=" + dueAmount + ", lastModifiedBy=" + lastModifiedBy
+				+ ", status=" + status + ", notes=" + notes + ", billReceivableDetails=" + billReceivableDetails + "]";
 	}
 }

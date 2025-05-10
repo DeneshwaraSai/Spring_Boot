@@ -1,4 +1,4 @@
-package com.billing.entity;
+package com.pharmacy.code.billing.entity;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ public class BillReceivableDetails {
 
 	@Id
 	@Column(name = "ID", nullable = false, length = 36, unique=true)
-	@NotEmpty(message = "{Id cannoit be empty.s}")
+	@NotEmpty(message = "{Id cannot be empty.s}")
 	private String id = UUID.randomUUID().toString();
 
 	@Column(name = "SERVICE_CODE")
@@ -40,7 +40,7 @@ public class BillReceivableDetails {
 	@Positive(message = "Quantity should be greater than 0")
 	private Integer quantity;
 
-	@Column(name = "PRICE")
+	@Column(name = "UNIT_PRICE")
 	@NotNull(message = "Unit price cannot be empty")
 	@Min(value = 1, message = "Unit price should be greater than zero")
 	private Double unitPrice;
@@ -56,7 +56,7 @@ public class BillReceivableDetails {
 	@Column(name = "DISCOUNT_PERC") 
 	private Double discountPerc; 
 
-	@Transient
+	@Column(name = "NET_AMOUNT")
 	private Double netAmount; 
 
 	@Column(name = "SGST")
@@ -65,16 +65,18 @@ public class BillReceivableDetails {
 	@Column(name = "CGST")
 	private Double cgst;
 
-	@Column(name = "IS_PHARMACY")
-	private Boolean isPharmacy;
-
 	@Column(name="TRANSACTION_ID")
 	@NotBlank(message = "Transaction-Id cannot be empty.")
 	private String transactionId;
 
-	public BillReceivableDetails(String id, String serviceCode, String serviceName, String hsnCode, Integer quantity,
-			Double unitPrice, Double totalPrice, Double discountAmount, Double discountPerc, Double netAmount, Double sgst, 
-			Double cgst, Boolean isPharmacy, String transactionId) {
+	public BillReceivableDetails() {
+
+	}
+
+	public BillReceivableDetails(String id, String serviceCode, String serviceName,
+								 String hsnCode, Integer quantity, Double unitPrice, Double totalPrice,
+								 Double discountAmount, Double discountPerc, Double netAmount, Double sgst,
+								 Double cgst, String transactionId) {
 		this.id = id;
 		this.serviceCode = serviceCode;
 		this.serviceName = serviceName;
@@ -87,7 +89,6 @@ public class BillReceivableDetails {
 		this.netAmount = netAmount;
 		this.sgst = sgst;
 		this.cgst = cgst;
-		this.isPharmacy = isPharmacy;
 		this.transactionId = transactionId;
 	}
 
@@ -96,11 +97,7 @@ public class BillReceivableDetails {
 	}
 
 	public void setId(String id) {
-		if (StringUtils.isBlank(id)) {
-			this.id = UUID.randomUUID().toString();
-		} else {
-			this.id = id;			
-		}
+		this.id = id;
 	}
 
 	public String getServiceCode() {
@@ -191,14 +188,6 @@ public class BillReceivableDetails {
 		this.cgst = cgst;
 	}
 
-	public Boolean getIsPharmacy() {
-		return isPharmacy;
-	}
-
-	public void setIsPharmacy(Boolean isPharmacy) {
-		this.isPharmacy = isPharmacy;
-	}
-
 	public String getTransactionId() {
 		return transactionId;
 	}
@@ -209,10 +198,20 @@ public class BillReceivableDetails {
 
 	@Override
 	public String toString() {
-		return "BillReceivableDetails [id=" + id + ", serviceCode=" + serviceCode + ", serviceName=" + serviceName
-				+ ", hsnCode=" + hsnCode + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", totalPrice="
-				+ totalPrice + ", discountAmount=" + discountAmount + ", discountPerc=" + discountPerc + ", netAmount="
-				+ netAmount + ", sgst=" + sgst + ", cgst=" + cgst + ", isPharmacy=" + isPharmacy + ", transactionId="
-				+ transactionId + "]";
+		return "BillReceivableDetails{" +
+				"id='" + id + '\'' +
+				", serviceCode='" + serviceCode + '\'' +
+				", serviceName='" + serviceName + '\'' +
+				", hsnCode='" + hsnCode + '\'' +
+				", quantity=" + quantity +
+				", unitPrice=" + unitPrice +
+				", totalPrice=" + totalPrice +
+				", discountAmount=" + discountAmount +
+				", discountPerc=" + discountPerc +
+				", netAmount=" + netAmount +
+				", sgst=" + sgst +
+				", cgst=" + cgst +
+				", transactionId='" + transactionId + '\'' +
+				'}';
 	}
 }

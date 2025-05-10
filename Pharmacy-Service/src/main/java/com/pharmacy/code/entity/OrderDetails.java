@@ -3,25 +3,22 @@ package com.pharmacy.code.entity;
 import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.apache.commons.lang3.StringUtils;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @Entity
-@Table(name="ORDER_DETIALS")
+@Table(name="ORDER_DETAILS")
 public class OrderDetails {
 
 	@Id
 	@Column(name = "ID")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name = "SUPPLIER_CODE")
 	@NotBlank(message = "Supplier code cannot be empty.")
@@ -75,9 +72,12 @@ public class OrderDetails {
 	@Column(name = "CGST")
 	private Double cgst;
 
-	public OrderDetails(String id, String supplierCode, String batchNumber, String drugId,
-			Date expiryDate, String drugName, String hsnCode, Integer quantity, Double unitPrice, Double totalPrice, 
-			Double discountAmount, Double discountPerc, String billReceivableDetailsId, Double sgst, Double cgst) {
+	public OrderDetails() { }
+
+	public OrderDetails(Integer id, String supplierCode, String batchNumber, String drugId, Date expiryDate,
+						String drugName, String hsnCode, Integer quantity, Double unitPrice, Double totalPrice,
+						Double discountAmount, Double discountPerc, String billReceivableDetailsId, Double sgst,
+						Double cgst) {
 		this.id = id;
 		this.supplierCode = supplierCode;
 		this.batchNumber = batchNumber;
@@ -95,16 +95,12 @@ public class OrderDetails {
 		this.cgst = cgst;
 	}
 
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
-		if (StringUtils.isBlank(id)) {
-			this.id = UUID.randomUUID().toString();
-		} else {
-			this.id = id;
-		}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getSupplierCode() {
@@ -221,18 +217,22 @@ public class OrderDetails {
 
 	@Override
 	public String toString() {
-		return "OrderDetails [id=" + id + ", supplierCode=" + supplierCode + ", batchNumber=" + batchNumber
-				+ ", drugId=" + drugId + ", expiryDate=" + expiryDate + ", drugName=" + drugName + ", hsnCode="
-				+ hsnCode + ", quantity=" + quantity + ", unitPrice=" + unitPrice + ", totalPrice=" + totalPrice
-				+ ", discountAmount=" + discountAmount + ", discountPerc=" + discountPerc + ", billReceivableDetailsId="
-				+ billReceivableDetailsId + ", sgst=" + sgst + ", cgst=" + cgst + ", getId()=" + getId()
-				+ ", getSupplierCode()=" + getSupplierCode() + ", getBatchNumber()=" + getBatchNumber()
-				+ ", getDrugId()=" + getDrugId() + ", getExpiryDate()=" + getExpiryDate() + ", getDrugName()="
-				+ getDrugName() + ", getHsnCode()=" + getHsnCode() + ", getQuantity()=" + getQuantity()
-				+ ", getUnitPrice()=" + getUnitPrice() + ", getTotalPrice()=" + getTotalPrice()
-				+ ", getDiscountAmount()=" + getDiscountAmount() + ", getDiscountPerc()=" + getDiscountPerc()
-				+ ", getBillReceivableDetailsId()=" + getBillReceivableDetailsId() + ", getSgst()=" + getSgst()
-				+ ", getCgst()=" + getCgst() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "OrderDetails{" +
+				"id='" + id + '\'' +
+				", supplierCode='" + supplierCode + '\'' +
+				", batchNumber='" + batchNumber + '\'' +
+				", drugId='" + drugId + '\'' +
+				", expiryDate=" + expiryDate +
+				", drugName='" + drugName + '\'' +
+				", hsnCode='" + hsnCode + '\'' +
+				", quantity=" + quantity +
+				", unitPrice=" + unitPrice +
+				", totalPrice=" + totalPrice +
+				", discountAmount=" + discountAmount +
+				", discountPerc=" + discountPerc +
+				", billReceivableDetailsId='" + billReceivableDetailsId + '\'' +
+				", sgst=" + sgst +
+				", cgst=" + cgst +
+				'}';
 	}
 }

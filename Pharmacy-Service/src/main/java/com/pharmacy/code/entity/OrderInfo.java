@@ -1,5 +1,6 @@
 package com.pharmacy.code.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -55,7 +56,7 @@ public class OrderInfo {
 	@Column(name = "AMOUNT_PAID")
 	@NotNull(message = "Amount paid cannot be null.")
 	@Positive(message = "Amount paid should be greater than 0")
-	private Integer amountPaid;
+	private Double amountPaid;
 
 	@Column(name = "DUE_AMOUNT")
 	private Double dueAmount;
@@ -63,14 +64,16 @@ public class OrderInfo {
 	@Column(name = "STATUS")
 	@NotNull(message = "Status cannot be null.")
 	private String status;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="ORDER_NUMBER", nullable = false)
+	@JoinColumn(name = "ORDER_NUMBER", nullable = false)
 	List<OrderDetails> orderDetails;
 
+	public OrderInfo() { }
+
 	public OrderInfo(String orderNumber, Integer uhid, String sequenceNumber, String billNumber, 
-			String transactionId, Date orderDate, Date lastModifiedDate, String createdBy, String lastModifiedBy, 
-			Integer amountPaid, Double dueAmount, String status, List<OrderDetails> orderDetails) {
+			String transactionId, Date orderDate, Date lastModifiedDate, String createdBy, String lastModifiedBy,
+					 Double amountPaid, Double dueAmount, String status, List<OrderDetails> orderDetails) {
 		this.orderNumber = orderNumber;
 		this.uhid = uhid;
 		this.sequenceNumber = sequenceNumber;
@@ -158,11 +161,11 @@ public class OrderInfo {
 		this.lastModifiedBy = lastModifiedBy;
 	}
 
-	public Integer getAmountPaid() {
+	public Double getAmountPaid() {
 		return amountPaid;
 	}
 
-	public void setAmountPaid(Integer amountPaid) {
+	public void setAmountPaid(Double amountPaid) {
 		this.amountPaid = amountPaid;
 	}
 

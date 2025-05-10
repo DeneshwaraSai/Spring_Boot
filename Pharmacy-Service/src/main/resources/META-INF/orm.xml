@@ -11,6 +11,10 @@
 			WHERE UPPER(CONCAT(PAT.FIRST_NAME, PAT.LAST_NAME)) LIKE UPPER(CONCAT('%', :name ,'%'))
 		</query>
 	</named-native-query>
+
+<!--	<named-native-query name="PatientService.searchOrders" result-set-mapping="SimpleOrderSearchMapping">-->
+<!--		<query></query>-->
+<!--	</named-native-query>-->
 	
 	<named-native-query name="SupplierService.getBySupplierCode">
 		<query>

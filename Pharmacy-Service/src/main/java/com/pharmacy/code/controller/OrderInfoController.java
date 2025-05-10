@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pharmacy.code.dto.OrderRequest;
+import com.pharmacy.code.dto.OrderResponse;
 import com.pharmacy.code.entity.OrderInfo;
 import com.pharmacy.code.service.OrderService;
 
@@ -21,8 +23,8 @@ public class OrderInfoController {
 	}
 	
 	@PostMapping("/order/create")
-		public OrderInfo save(@RequestBody OrderInfo orderInfo) {
+		public OrderResponse save(@RequestBody OrderRequest orderRequest) {
 		// TODO Auto-generated method stub
-		return orderService.save(orderInfo);
+		return orderService.save(orderRequest);
 	}
 }

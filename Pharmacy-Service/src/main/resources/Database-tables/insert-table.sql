@@ -323,9 +323,25 @@ INSERT INTO PHARMACY.CODE_VALUE (CODE, VALUE, DOMAIN_NAME, STATUS) VALUES
 ('IP', 'In-Progress', 'INVENTORY_STATUS', 'A'),
 ('C', 'Complete', 'INVENTORY_STATUS', 'A'),
 ('A', 'Approved', 'INVENTORY_STATUS', 'A'),
-('I', 'InActive', 'INVENTORY_STATUS', 'A');
-
+('I', 'InActive', 'INVENTORY_STATUS', 'A'),
+('C', 'Cash', 'PAYMENT_TYPE', 'A'),
+('CQ', 'Cheque', 'PAYMENT_TYPE', 'A'),
+('NB', 'Net Banking', 'PAYMENT_TYPE', 'A'),
+('MB', 'Mobile Banking', 'PAYMENT_TYPE', 'A'),
+('DC', 'Debit Card', 'PAYMENT_TYPE', 'A'),
+('CC', 'Credit Card', 'PAYMENT_TYPE', 'A');
  
+INSERT INTO PHARMACY.CODE_VALUE(CODE, VALUE, DOMAIN_NAME, STATUS) VALUES
+('AME', 'American Express', 'BANK_NAME', 'A'),
+('BOA', 'Bank of America', 'BANK_NAME', 'A'),
+('CAP', 'Capital One', 'BANK_NAME', 'A'),
+('CHA', 'Chase Bank', 'BANK_NAME', 'A'),
+('CIT', 'Citi Bank', 'BANK_NAME', 'A'),
+('DIS', 'Discover Bank', 'BANK_NAME', 'A'),
+('HSB', 'HSBC Bank', 'BANK_NAME', 'A'),
+('PNC', 'PNC Bank', 'BANK_NAME', 'A'),
+('USB', 'U.S. Bank', 'BANK_NAME', 'A'),
+('WEL', 'Wells Fargo', 'BANK_NAME', 'A');
 ----------------------------------------------------------------------------------------------------------------
 
 
